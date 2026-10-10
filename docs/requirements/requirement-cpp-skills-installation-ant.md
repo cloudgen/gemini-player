@@ -9,7 +9,7 @@ Apache Ant is not a build of gemini-wilgat. `./build.sh` does not implement an `
 
 ### 1.1 Human-facing
 
-**In one sentence:** You do not build this window with Ant, because that verb is not in `build.sh`.
+**In one sentence:** `./build.sh` still has no `ant` verb. Direct `ant build` is specified in `requirement-cpp-dual-build.md`.
 
 | Box | Meaning | Example |
 |-----|---------|---------|
@@ -33,7 +33,7 @@ Apache Ant is not a build of gemini-wilgat. `./build.sh` does not implement an `
 ## 2. Core rules
 
 - Do not document `target/debug/r2webpad` or `target/exe/debug/r2webpad` as this product's binary.
-- Do not document `ant install`, `ant build`, or `./build.sh ant` as a current command.
+- Do not add an `ant` verb to `./build.sh` from this file. Direct `ant build` is specified in `requirement-cpp-dual-build.md`.
 - This file becomes Active only in the same change that adds the verb to the `build.sh` case statement and names the binary `target/exe/debug/gemini-wilgat`.
 
 ## 3. Protection rule

@@ -104,7 +104,7 @@ These are not Windows requirements. Do not add them to satisfy this file:
 | A second Visual Studio edition | Community 2022 is the installed product |
 | An elevated prompt | The build and the player run as `leolio` |
 
-The Linux commands `./build.sh` and `meson compile` stay the Linux build. They are not how this Windows tree is compiled. `CMakeLists.txt` stops on a non-Windows host and tells you to run `./build.sh`.
+The Linux commands `./build.sh` and `meson compile` stay the primary Linux build. They are not how `gemini-player.exe` is compiled. On Windows, `CMakeLists.txt` builds `gemini-player.exe`. On Ubuntu the same file builds `gemini-wilgat`. That split is `requirement-cpp-dual-build.md`.
 
 ### 2.1 Why this requirement exists
 

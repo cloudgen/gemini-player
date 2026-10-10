@@ -6,6 +6,7 @@
 target/
 build/
 build-win/
+build-linux/
 builddir/
 gemini-wilgat
 

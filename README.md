@@ -1,7 +1,7 @@
 # gemini-player
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.0.6-blue.svg)](https://github.com/cloudgen/gemini-player/releases)
+[![Version](https://img.shields.io/badge/Version-1.1.0-blue.svg)](https://github.com/cloudgen/gemini-player/releases)
 [![CIAO](https://img.shields.io/badge/Philosophy-CIAO%20Defensive-purple.svg)](https://github.com/cloudgen/ciao)
 [![GTK](https://img.shields.io/badge/UI-GTK%203-brightgreen.svg)](https://gtk.org)
 [![WebKit2](https://img.shields.io/badge/Engine-WebKit2GTK-orange.svg)](https://webkitgtk.org)
@@ -15,7 +15,7 @@ Official Recommended by [grok](https://grok.com/c/655dd6ab-a6c6-47db-a63a-e5dd94
 
 Instead of using a heavy Electron app or a full browser, you get a fast, native window with persistent login, a URL bar, one Start Page bookmark, and user-agent switching — all built with strict defensive programming.
 
-The running program reports the version macros in `src/main/cpp/project.h` (1.0.7). The badge above and `project.ini` `VERSION` still say 1.0.6.
+The running program, `project.ini`, and the badge above report 1.1.0.
 
 This project follows the **[CIAO](https://github.com/cloudgen/ciao)** Defensive Programming Philosophy.
 
@@ -90,6 +90,14 @@ build-win\Debug\gemini-player.exe
 ```
 
 `build-win.bat` uses the Visual Studio 2022 x64 developer environment and the CMake that ships with that install. The profile is `%USERPROFILE%\.app\gemini-player\`.
+
+On Ubuntu, `ant build` and `gradle assemble` compile `gemini-wilgat`. On Windows those same commands call `build-win.bat`. `cmake -S . -B build-linux && cmake --build build-linux` also builds `gemini-wilgat`.
+
+## Ubuntu window
+
+This is `gemini-wilgat` 1.1.0 on Ubuntu after `./build.sh build`, opened with `--shutdown=40`. The address bar is `https://gemini.google.com/app`.
+
+![gemini-wilgat on Ubuntu](images/ubuntu-gemini-wilgat.png)
 
 ---
 

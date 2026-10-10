@@ -28,6 +28,7 @@ Product law for gemini-wilgat. Rows match files in this folder.
 | requirement-cpp-dependencies | dependencies | Active | requirement-cpp-dependencies.md |
 | requirement-cpp-windows-environment | windows | Active | requirement-cpp-windows-environment.md |
 | requirement-cpp-windows-player | windows | Active | requirement-cpp-windows-player.md |
+| requirement-cpp-dual-build | build | Active | requirement-cpp-dual-build.md |
 | requirement-cpp-skills-installation-basic | build | Active | requirement-cpp-skills-installation-basic.md |
 | requirement-cpp-skills-installation-meson | build | Active | requirement-cpp-skills-installation-meson.md |
 | requirement-cpp-skills | skills | Deferred | requirement-cpp-skills.md |
@@ -48,6 +49,8 @@ The lua-script row owns the C++ host: one sol2 state in `userscript_manager.cpp`
 The dependencies row owns the libraries the Linux C/C++ program links: GTK 3, WebKitGTK 4.1 (libwebkit2gtk), GLib, SQLite (libsqlite3), Lua 5.3 (liblua), threads, and the sol2 headers.
 
 The windows-environment row owns the Visual Studio 2022 toolchain on `leolio@win`. The windows-player row owns `gemini-player.exe`: WebView2, the profile under `%USERPROFILE%\.app\gemini-player\`, and the Win32 window. Those two rows do not change the Linux link set.
+
+The dual-build row owns one tree on Ubuntu and on Windows. Ubuntu `./build.sh build`, `ant build`, `gradle assemble`, Meson, and CMake produce `gemini-wilgat`. Windows `build-win.bat` produces `gemini-player.exe`, and `ant build` or `gradle assemble` on Windows call that batch file. The Ant and Gradle skill rows stay Deferred because `./build.sh` still has no `ant` or `gradle` verb.
 
 Deferred rows are not current behavior. `./build.sh` implements `install`, `clean`, and `build` only.
 

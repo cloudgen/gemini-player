@@ -95,6 +95,16 @@ clean() {
 # Last updated: 2026-05-24
 # =========================================================================
 build() {
+    # Host gate. MSYS, MinGW, and Cygwin build the Windows player and return
+    # before the GTK compile below. Those GTK lines stay as they are.
+    case "$(uname -s 2>/dev/null || echo unknown)" in
+        MINGW*|MSYS*|CYGWIN*)
+            echo "[INFO] Windows shell. Delegating to build-win.bat..."
+            cmd //c build-win.bat
+            return
+            ;;
+    esac
+
     echo "[INFO] Starting simple C++ build for ${PROJECT_NAME}..."
 
     mkdir -p "${BUILD_DIR}"

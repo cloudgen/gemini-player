@@ -42,7 +42,7 @@ This file owns the Windows program `gemini-player.exe`. The Linux program remain
 | `PROJECT_ID` | `gemini-player` |
 | `PROJECT_NAME` | `Gemini` |
 | `PROJECT_DESCRIPTION` | `A lightweight native Gemini player built with WebView2 on Windows.` |
-| `VERSION_MAJOR` `VERSION_MINOR` `VERSION_PATCH` | Unchanged from `project.h` (`1.0.7`) |
+| `VERSION_MAJOR` `VERSION_MINOR` `VERSION_PATCH` | Unchanged from `project.h` (`1.1.0`) |
 | `START_PAGE` | Unchanged from `project.h` (`https://gemini.google.com`) |
 | `PLAYER_DEFAULT_USER_AGENT` | `UA_EDGE` |
 

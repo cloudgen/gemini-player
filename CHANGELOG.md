@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-10-10
+
+### Added
+- One tree builds on Ubuntu and on Windows. Ubuntu still produces the WebKitGTK program `gemini-wilgat`. Windows still produces `gemini-player.exe`.
+- `ant build` and `gradle assemble` follow the host. On Windows they call `build-win.bat`.
+- `./build.sh build` on MSYS, MinGW, or Cygwin calls `build-win.bat` and returns before the GTK compile.
+- CMake on Ubuntu builds `gemini-wilgat`. CMake on Windows still builds `gemini-player.exe`.
+
+### Changed
+- `project.h`, `project.ini`, Meson, CMake, the Ant `version` property, and the Gradle script version are 1.1.0.
+
 ## [1.0.6] - 2026-04-18
 
 ### Added

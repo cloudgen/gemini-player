@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="gemini-wilgat" default="build" basedir=".">
-    <property name="version" value="1.0.1"/>
+    <property name="version" value="1.1.0"/>
     <!-- Define project properties -->
     <property file="project.ini"/>
     <!-- Define project properties with defaults -->    
@@ -17,6 +17,9 @@
     <property name="project.sh" value="./project.sh"/>
     <property name="required.packages" value="build-essential libwebkit2gtk-4.1-dev libsqlite3-dev liblua5.3-dev lua5.3"/>
     <property name="avoided.packages" value=""/>
+    <condition property="os.windows">
+        <os family="windows"/>
+    </condition>
     <macrodef name="replace-property" taskname="@{taskname}">
         <attribute name="src" />
         <attribute name="dest" default="" />
@@ -233,7 +236,7 @@ install
       Link with g++ when any .cpp file is present, otherwise with gcc.
       Does not install packages.
     -->
-    <target name="compile">
+    <target name="compile" unless="os.windows">
         <resourcecount property="c.count">
             <union>
                 <fileset dir="${src.c.dir}" includes="**/*.c" erroronmissingdir="false"/>
@@ -333,9 +336,17 @@ install
         <delete file="${src.cpp.dir}/Makefile.in"/>
     </target>
 
+    <!-- Windows host: Visual Studio player. Linux host: this target is skipped. -->
+    <target name="build-windows" if="os.windows">
+        <exec executable="cmd" failonerror="true">
+            <arg value="/c"/>
+            <arg value="build-win.bat"/>
+        </exec>
+    </target>
+
     <!-- Target to build the application -->
-    <target name="build" depends="compile">
-        <echo message="Build completed. You can run the application with the command: ${build.debug.dir}/${app.name}"/>
+    <target name="build" depends="compile,build-windows">
+        <echo message="Build completed. Ubuntu binary: ${build.debug.dir}/${app.name}. Windows binary: build-win/Debug/gemini-player.exe"/>
     </target>
 
     <target name="check-exe">
@@ -346,8 +357,17 @@ install
       <antcall target="build"/>
     </target>
 
-    <!-- Target to run the application -->
-    <target name="run" depends="build-if-not-exists">
+    <target name="run-linux" unless="os.windows" depends="build-if-not-exists">
         <exec executable="${build.debug.dir}/${app.name}"/>
     </target>
+
+    <target name="run-windows" if="os.windows" depends="build-windows">
+        <exec executable="cmd" failonerror="true">
+            <arg value="/c"/>
+            <arg value="build-win\Debug\gemini-player.exe"/>
+        </exec>
+    </target>
+
+    <!-- Target to run the application -->
+    <target name="run" depends="run-linux,run-windows"/>
 </project>
