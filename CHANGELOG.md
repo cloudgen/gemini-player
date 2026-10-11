@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - One tree builds on Ubuntu and on Windows. Ubuntu still produces the WebKitGTK program `gemini-wilgat`. Windows still produces `gemini-player.exe`.
+- README shows the Ubuntu window and the Windows window, and explains how to build and run `gemini-player.exe`.
 - `ant build` and `gradle assemble` follow the host. On Windows they call `build-win.bat`.
 - `./build.sh build` on MSYS, MinGW, or Cygwin calls `build-win.bat` and returns before the GTK compile.
 - CMake on Ubuntu builds `gemini-wilgat`. CMake on Windows still builds `gemini-player.exe`.

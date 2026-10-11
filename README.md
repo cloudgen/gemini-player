@@ -77,11 +77,18 @@ meson compile -C builddir
 ./builddir/gemini-wilgat
 ```
 
+On Ubuntu, `ant build` and `gradle assemble` compile `gemini-wilgat`. `cmake -S . -B build-linux && cmake --build build-linux` also builds `gemini-wilgat`.
+
 ### Windows (Visual Studio 2022)
 
-The Windows program is `gemini-player.exe`. It is a Win32 window that hosts the WebView2 runtime. It does not compile the GTK sources. Toolchain and behavior are recorded in `docs/requirements/requirement-cpp-windows-environment.md` and `docs/requirements/requirement-cpp-windows-player.md`.
+`gemini-player.exe` is the Windows program. It compiles `src/win` into a Win32 window and opens Gemini in the WebView2 runtime. The WebView2 loader and the SQLite amalgamation are already in `third_party/`.
 
-On the machine where Visual Studio Community 2022 and the WebView2 Evergreen runtime are installed:
+Install these before the first build:
+
+- Visual Studio 2022 Community, with the **Desktop development with C++** workload. `build-win.bat` calls `C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat` and the CMake that ships in that install. CMake does not need to be on `PATH`.
+- The [WebView2 Evergreen runtime](https://developer.microsoft.com/microsoft-edge/webview2/). Current Windows installs usually already have it.
+
+From a command prompt in this repository:
 
 ```bat
 build-win.bat
@@ -89,15 +96,34 @@ build-win\Debug\gemini-player.exe --check
 build-win\Debug\gemini-player.exe
 ```
 
-`build-win.bat` uses the Visual Studio 2022 x64 developer environment and the CMake that ships with that install. The profile is `%USERPROFILE%\.app\gemini-player\`.
+`build-win.bat` configures the Visual Studio 17 2022 x64 generator and builds Debug. The result is `build-win\Debug\gemini-player.exe` next to `WebView2Loader.dll`.
 
-On Ubuntu, `ant build` and `gradle assemble` compile `gemini-wilgat`. On Windows those same commands call `build-win.bat`. `cmake -S . -B build-linux && cmake --build build-linux` also builds `gemini-wilgat`.
+`--check` creates the profile, creates the WebView2 environment, prints `check passed`, and exits. It leaves the window closed. Start `gemini-player.exe` from a signed-in Windows desktop to open the window. The address bar loads `https://gemini.google.com`.
+
+```bat
+build-win\Debug\gemini-player.exe help
+build-win\Debug\gemini-player.exe --shutdown=40
+```
+
+`help` prints the flags and exits. `--shutdown=40` closes the window after 40 seconds. A flag wins over the matching environment variable (`SHUTDOWN`, `BOOKMARK`, `QUIET`, `JSON`, `DEBUG`), and that variable wins over `config.conf`.
+
+The profile is `%USERPROFILE%\.app\gemini-player\`. The Google login stays in the `webview2` folder. The chosen user agent stays in `settings.sqlite`.
+
+On Windows, `ant build` and `gradle assemble` call `build-win.bat`. `ant run` and `gradle run` open `gemini-player.exe`. Those two tools need a JDK on `PATH`. `build-win.bat` is enough for the build. From Git Bash, MSYS, or Cygwin, `./build.sh build` calls `build-win.bat` and returns before the GTK compile.
+
+The Windows toolchain and the window behavior are recorded in `docs/requirements/requirement-cpp-windows-environment.md` and `docs/requirements/requirement-cpp-windows-player.md`.
 
 ## Ubuntu window
 
 This is `gemini-wilgat` 1.1.0 on Ubuntu after `./build.sh build`, opened with `--shutdown=40`. The address bar is `https://gemini.google.com/app`.
 
 ![gemini-wilgat on Ubuntu](images/ubuntu-gemini-wilgat.png)
+
+## Windows window
+
+This is `gemini-player.exe` 1.1.0 on Windows after `build-win.bat`. The address bar is `https://gemini.google.com/app`.
+
+![gemini-player on Windows](images/windows-gemini-player.png)
 
 ---
 
