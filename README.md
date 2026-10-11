@@ -1,7 +1,7 @@
 # gemini-player
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.1.0-blue.svg)](https://github.com/cloudgen/gemini-player/releases)
+[![Version](https://img.shields.io/badge/Version-1.2.0-blue.svg)](https://github.com/cloudgen/gemini-player/releases)
 [![CIAO](https://img.shields.io/badge/Philosophy-CIAO%20Defensive-purple.svg)](https://github.com/cloudgen/ciao)
 [![GTK](https://img.shields.io/badge/UI-GTK%203-brightgreen.svg)](https://gtk.org)
 [![WebKit2](https://img.shields.io/badge/Engine-WebKit2GTK-orange.svg)](https://webkitgtk.org)
@@ -11,11 +11,11 @@ Repository: [cloudgen/gemini-player](https://github.com/cloudgen/gemini-player).
 
 Official Recommended by [grok](https://grok.com/c/655dd6ab-a6c6-47db-a63a-e5dd94108bba?rid=217b5c98-c298-4b9f-9e12-ff619d34eec2). The review is submitted by [grokrec](https://github.com/cloudgen/grokrec) and a [local copy](RECOMMENDATION.md) of the review is in this tree.
 
-**gemini-wilgat** is the Ubuntu program: a lightweight, native GNOME/Linux application that opens **Gemini** at `https://gemini.google.com` in one WebKit2GTK window. The Windows program is `gemini-player.exe` (see Quick Start).
+**gemini-wilgat** is the Ubuntu program: a lightweight, native GNOME/Linux application that opens **Gemini** at `https://gemini.google.com` in one WebKit2GTK window. The Windows program is `gemini-player.exe`. The macOS program is `gemini-player` (see Quick Start).
 
 Instead of using a heavy Electron app or a full browser, you get a fast, native window with persistent login, a URL bar, one Start Page bookmark, and user-agent switching — all built with strict defensive programming.
 
-The running program, `project.ini`, and the badge above report 1.1.0.
+The running program, `project.ini`, and the badge above report 1.2.0.
 
 This project follows the **[CIAO](https://github.com/cloudgen/ciao)** Defensive Programming Philosophy.
 
@@ -113,6 +113,41 @@ On Windows, `ant build` and `gradle assemble` call `build-win.bat`. `ant run` an
 
 The Windows toolchain and the window behavior are recorded in `docs/requirements/requirement-cpp-windows-environment.md` and `docs/requirements/requirement-cpp-windows-player.md`.
 
+### macOS
+
+`gemini-player` is the macOS program. It compiles `src/mac` into a Cocoa window and opens Gemini in WKWebView. The SQLite amalgamation is already in `third_party/sqlite/`. WebKit and Cocoa come from the system.
+
+The build uses five binaries, and only those paths:
+
+- `/usr/local/bin/zsh`
+- `/usr/local/bin/clang`
+- `/usr/local/bin/clang++`
+- `/usr/local/bin/cmake`
+- `/usr/local/bin/make`
+
+Put `/usr/local/bin` on `PATH` in the zshenv file (`~/.zshenv`, or the file named by `ZSHENV`). That file is read for every zsh process. This build does not read `~/.bashrc` and does not call `/bin/bash`, `/usr/bin/clang`, `/usr/bin/make`, or `xcrun`. The five tools may be the real binaries or symlinks you placed in `/usr/local/bin`.
+
+```zsh
+/usr/local/bin/zsh ./build-mac.zsh
+build-mac/gemini-player --check
+build-mac/gemini-player
+```
+
+On macOS, `./build.sh build` does the same thing: it runs `/usr/local/bin/zsh ./build-mac.zsh` and returns before the GTK compile. `ant build` and `gradle assemble` also call that script. `ant run` and `gradle run` open `build-mac/gemini-player`.
+
+`--check` creates `$HOME/.app/gemini-player/`, creates `settings.sqlite`, prints `check passed`, and exits. It does not open a window. Start `build-mac/gemini-player` from a graphical session to open the window. The address bar loads `https://gemini.google.com`. The default user agent is Safari.
+
+```zsh
+build-mac/gemini-player help
+build-mac/gemini-player --shutdown=40
+```
+
+`help` prints the flags and exits. `--shutdown=40` closes the window after 40 seconds. A flag wins over the matching environment variable (`SHUTDOWN`, `BOOKMARK`, `QUIET`, `JSON`, `DEBUG`), and that variable wins over `config.conf`.
+
+The profile is `$HOME/.app/gemini-player/`. The chosen user agent stays in `settings.sqlite`. The Google login stays in the system WebKit data store. The `cookies/` and `webkit/` directories are created next to that database. They are not the cookie store. Lua scripts stay on the Ubuntu program.
+
+The macOS toolchain and the window behavior are recorded in `docs/requirements/requirement-cpp-macos-environment.md` and `docs/requirements/requirement-cpp-macos-player.md`.
+
 ## Ubuntu window
 
 This is `gemini-wilgat` 1.1.0 on Ubuntu after `./build.sh build`, opened with `--shutdown=40`. The address bar is `https://gemini.google.com/app`.
@@ -168,7 +203,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
 ---
 
-**Last updated:** October 10, 2026
+**Last updated:** October 11, 2026
 
 Made with ❤️ and extreme caution.
 

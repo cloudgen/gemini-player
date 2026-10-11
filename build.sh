@@ -103,6 +103,11 @@ build() {
             cmd //c build-win.bat
             return
             ;;
+        Darwin)
+            echo "[INFO] macOS. Delegating to build-mac.zsh..."
+            /usr/local/bin/zsh ./build-mac.zsh
+            return
+            ;;
     esac
 
     echo "[INFO] Starting simple C++ build for ${PROJECT_NAME}..."

@@ -28,6 +28,8 @@ Product law for gemini-wilgat. Rows match files in this folder.
 | requirement-cpp-dependencies | dependencies | Active | requirement-cpp-dependencies.md |
 | requirement-cpp-windows-environment | windows | Active | requirement-cpp-windows-environment.md |
 | requirement-cpp-windows-player | windows | Active | requirement-cpp-windows-player.md |
+| requirement-cpp-macos-environment | macos | Active | requirement-cpp-macos-environment.md |
+| requirement-cpp-macos-player | macos | Active | requirement-cpp-macos-player.md |
 | requirement-cpp-dual-build | build | Active | requirement-cpp-dual-build.md |
 | requirement-cpp-skills-installation-basic | build | Active | requirement-cpp-skills-installation-basic.md |
 | requirement-cpp-skills-installation-meson | build | Active | requirement-cpp-skills-installation-meson.md |
@@ -50,7 +52,9 @@ The dependencies row owns the libraries the Linux C/C++ program links: GTK 3, We
 
 The windows-environment row owns the Visual Studio 2022 toolchain on `leolio@win`. The windows-player row owns `gemini-player.exe`: WebView2, the profile under `%USERPROFILE%\.app\gemini-player\`, and the Win32 window. Those two rows do not change the Linux link set.
 
-The dual-build row owns one tree on Ubuntu and on Windows. Ubuntu `./build.sh build`, `ant build`, `gradle assemble`, Meson, and CMake produce `gemini-wilgat`. Windows `build-win.bat` produces `gemini-player.exe`, and `ant build` or `gradle assemble` on Windows call that batch file. The Ant and Gradle skill rows stay Deferred because `./build.sh` still has no `ant` or `gradle` verb.
+The macos-environment row owns the macOS toolchain. `zsh`, `clang`, `clang++`, `cmake`, and `make` are taken from `/usr/local/bin`. PATH is read from the zshenv file, not from a bash startup file. The macos-player row owns the Cocoa and WKWebView program `gemini-player`, the profile under `$HOME/.app/gemini-player/`, and the system WebKit data store. Those two rows do not change the Linux link set.
+
+The dual-build row owns one tree on Ubuntu, Windows, and macOS. Ubuntu `./build.sh build`, `ant build`, `gradle assemble`, Meson, and CMake produce `gemini-wilgat`. Windows `build-win.bat` produces `gemini-player.exe`, and `ant build` or `gradle assemble` on Windows call that batch file. macOS `/usr/local/bin/zsh ./build-mac.zsh` produces `build-mac/gemini-player`, and `./build.sh build`, `ant build`, or `gradle assemble` on macOS call that script. The Ant and Gradle skill rows stay Deferred because `./build.sh` still has no `ant` or `gradle` verb.
 
 Deferred rows are not current behavior. `./build.sh` implements `install`, `clean`, and `build` only.
 

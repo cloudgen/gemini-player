@@ -1,6 +1,6 @@
 **file**: docs/requirements/requirement-cpp-windows-player.md
 **Status**: Active
-**Updated**: 2026-10-10
+**Updated**: 2026-10-11
 **Philosophy**: CIAO v2.10.2 / CIAO-Lite (Caution • Intentional • Anti-fragile • Over-engineered / Over-protect)
 
 ## 1. Purpose
@@ -42,7 +42,7 @@ This file owns the Windows program `gemini-player.exe`. The Linux program remain
 | `PROJECT_ID` | `gemini-player` |
 | `PROJECT_NAME` | `Gemini` |
 | `PROJECT_DESCRIPTION` | `A lightweight native Gemini player built with WebView2 on Windows.` |
-| `VERSION_MAJOR` `VERSION_MINOR` `VERSION_PATCH` | Unchanged from `project.h` (`1.1.0`) |
+| `VERSION_MAJOR` `VERSION_MINOR` `VERSION_PATCH` | Unchanged from `project.h` (`1.2.0`) |
 | `START_PAGE` | Unchanged from `project.h` (`https://gemini.google.com`) |
 | `PLAYER_DEFAULT_USER_AGENT` | `UA_EDGE` |
 
@@ -178,5 +178,5 @@ Future editors must not copy user-agent string literals into `src/win`, must not
 | `src/win/win_log.cpp` | Stored log line |
 | `src/main/cpp/project.h` | User-agent strings and version macros |
 
-**Last updated**: 2026-10-10
+**Last updated**: 2026-10-11
 **Owner**: Windows player

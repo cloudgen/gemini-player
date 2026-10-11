@@ -7,6 +7,7 @@ target/
 build/
 build-win/
 build-linux/
+build-mac/
 builddir/
 gemini-wilgat
 

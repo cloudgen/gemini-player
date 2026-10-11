@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <project name="gemini-wilgat" default="build" basedir=".">
-    <property name="version" value="1.1.0"/>
+    <property name="version" value="1.2.0"/>
     <!-- Define project properties -->
     <property file="project.ini"/>
     <!-- Define project properties with defaults -->    
@@ -19,6 +19,15 @@
     <property name="avoided.packages" value=""/>
     <condition property="os.windows">
         <os family="windows"/>
+    </condition>
+    <condition property="os.mac">
+        <os family="mac"/>
+    </condition>
+    <condition property="os.skip.gtk">
+        <or>
+            <isset property="os.windows"/>
+            <isset property="os.mac"/>
+        </or>
     </condition>
     <macrodef name="replace-property" taskname="@{taskname}">
         <attribute name="src" />
@@ -236,7 +245,7 @@ install
       Link with g++ when any .cpp file is present, otherwise with gcc.
       Does not install packages.
     -->
-    <target name="compile" unless="os.windows">
+    <target name="compile" unless="os.skip.gtk">
         <resourcecount property="c.count">
             <union>
                 <fileset dir="${src.c.dir}" includes="**/*.c" erroronmissingdir="false"/>
@@ -345,8 +354,14 @@ install
     </target>
 
     <!-- Target to build the application -->
-    <target name="build" depends="compile,build-windows">
-        <echo message="Build completed. Ubuntu binary: ${build.debug.dir}/${app.name}. Windows binary: build-win/Debug/gemini-player.exe"/>
+    <target name="build-macos" if="os.mac">
+        <exec executable="/usr/local/bin/zsh" failonerror="true">
+            <arg value="build-mac.zsh"/>
+        </exec>
+    </target>
+
+    <target name="build" depends="compile,build-windows,build-macos">
+        <echo message="Build completed. Ubuntu binary: ${build.debug.dir}/${app.name}. Windows binary: build-win/Debug/gemini-player.exe. macOS binary: build-mac/gemini-player"/>
     </target>
 
     <target name="check-exe">
@@ -357,7 +372,7 @@ install
       <antcall target="build"/>
     </target>
 
-    <target name="run-linux" unless="os.windows" depends="build-if-not-exists">
+    <target name="run-linux" unless="os.skip.gtk" depends="build-if-not-exists">
         <exec executable="${build.debug.dir}/${app.name}"/>
     </target>
 
@@ -369,5 +384,9 @@ install
     </target>
 
     <!-- Target to run the application -->
-    <target name="run" depends="run-linux,run-windows"/>
+    <target name="run-macos" if="os.mac" depends="build-macos">
+        <exec executable="build-mac/gemini-player" failonerror="true"/>
+    </target>
+
+    <target name="run" depends="run-linux,run-windows,run-macos"/>
 </project>

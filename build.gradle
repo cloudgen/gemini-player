@@ -24,11 +24,13 @@ plugins {
     id 'cpp-application'
 }
 
-def THIS_VERSION = '1.1.0'
+def THIS_VERSION = '1.2.0'
 
 // Host dispatch. The cpp-application tasks below stay the Ubuntu GTK compile.
 // On Windows those tasks are skipped and assemble runs build-win.bat.
+// On macOS those tasks are skipped and assemble runs build-mac.zsh.
 def osWindows = System.getProperty('os.name', '').toLowerCase().contains('windows')
+def osMac = System.getProperty('os.name', '').toLowerCase().contains('mac')
 
 // =========================================================================
 // loadPropertiesFromIni(File iniFile)
@@ -140,6 +142,8 @@ def pkgCflags = []
 def pkgLibs = []
 if (osWindows) {
     println "[INFO] Windows host. Skipping pkg-config. assemble runs build-win.bat."
+} else if (osMac) {
+    println "[INFO] macOS host. Skipping pkg-config. assemble runs build-mac.zsh."
 } else {
     pkgCflags = splitFlags(runCommand("pkg-config --cflags ${linkModules.join(' ')}"))
     pkgLibs = splitFlags(runCommand("pkg-config --libs ${linkModules.join(' ')}"))
@@ -164,7 +168,7 @@ def cObjectDir = file("${BUILD_DEBUG}/obj/c")
 tasks.register('compileC') {
     inputs.files(cSources)
     outputs.dir(cObjectDir)
-    onlyIf { !osWindows && !cSources.files.isEmpty() }
+    onlyIf { !osWindows && !osMac && !cSources.files.isEmpty() }
     doLast {
         cObjectDir.mkdirs()
         cSources.each { File src ->
@@ -180,13 +184,13 @@ tasks.register('compileC') {
 }
 
 tasks.withType(CppCompile).configureEach {
-    onlyIf { !osWindows }
+    onlyIf { !osWindows && !osMac }
     compilerArgs.addAll(['-std=c++17', '-Wall', '-Wextra', '-g', '-O2', '-I/usr/local/include'])
     compilerArgs.addAll(pkgCflags)
 }
 
 tasks.withType(LinkExecutable).configureEach { link ->
-    link.onlyIf { !osWindows }
+    link.onlyIf { !osWindows && !osMac }
     link.dependsOn('compileC')
     link.source.from(fileTree(dir: cObjectDir, include: '**/*.o'))
     link.linkerArgs.addAll(pkgLibs)
@@ -237,10 +241,34 @@ tasks.register('buildWindows', Exec) {
     commandLine 'cmd', '/c', 'build-win.bat'
 }
 
+// =========================================================================
+// buildMac
+//
+// Purpose:
+//   On macOS, assemble the WebKit player with build-mac.zsh. Ubuntu and
+//   Windows skip this task. The GTK compile above is unchanged.
+//
+// Protection Rule:
+//   DO NOT point this task at src/main/cpp, pkg-config, /bin/bash, or
+//   /usr/bin. The zsh binary is /usr/local/bin/zsh.
+// =========================================================================
+tasks.register('buildMac', Exec) {
+    onlyIf { osMac }
+    group = 'build'
+    description = 'macOS player via build-mac.zsh.'
+    workingDir projectDir
+    commandLine '/usr/local/bin/zsh', 'build-mac.zsh'
+}
+
 gradle.projectsEvaluated {
     if (osWindows && tasks.findByName('assemble') != null) {
         tasks.named('assemble').configure {
             dependsOn 'buildWindows'
+        }
+    }
+    if (osMac && tasks.findByName('assemble') != null) {
+        tasks.named('assemble').configure {
+            dependsOn 'buildMac'
         }
     }
 }
@@ -362,9 +390,13 @@ task run(type: Exec) {
     description = 'Assemble the debug binary for this host and open the window.'
     def binary = osWindows
         ? layout.projectDirectory.file('build-win/Debug/gemini-player.exe').asFile
-        : layout.projectDirectory.file("${BUILD_DEBUG}/${PRJ}").asFile
+        : osMac
+            ? layout.projectDirectory.file('build-mac/gemini-player').asFile
+            : layout.projectDirectory.file("${BUILD_DEBUG}/${PRJ}").asFile
     if (osWindows) {
         dependsOn 'buildWindows'
+    } else if (osMac) {
+        dependsOn 'buildMac'
     } else {
         dependsOn 'assemble'
     }
@@ -375,7 +407,7 @@ task run(type: Exec) {
         if (!binary.isFile()) {
             throw new GradleException("[ERROR] Debug binary is missing: ${binary}")
         }
-        if (!osWindows) {
+        if (!osWindows && !osMac) {
             def display = System.getenv('DISPLAY')
             def wayland = System.getenv('WAYLAND_DISPLAY')
             def displayMissing = display == null || display.trim().isEmpty()

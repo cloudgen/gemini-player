@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2026-10-11
+
+### Added
+- macOS program `gemini-player` from `src/mac`. It opens Gemini in a Cocoa window with WKWebView. Ubuntu still produces `gemini-wilgat`. Windows still produces `gemini-player.exe`.
+- `build-mac.zsh` runs under `/usr/local/bin/zsh` and reads PATH from the zshenv file. CMake, clang, clang++, and make are `/usr/local/bin/cmake`, `/usr/local/bin/clang`, `/usr/local/bin/clang++`, and `/usr/local/bin/make`.
+- On macOS, `./build.sh build`, `ant build`, and `gradle assemble` call that script and return before the GTK compile.
+
+### Changed
+- `project.h`, `project.ini`, Meson, CMake, the Ant `version` property, and the Gradle script version are 1.2.0.
+
 ## [1.1.0] - 2026-10-10
 
 ### Added

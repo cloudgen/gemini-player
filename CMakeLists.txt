@@ -1,9 +1,10 @@
-# Two targets, one file.
+# Three targets, one file.
 # Windows: gemini-player.exe (Win32 + WebView2). See requirement-cpp-windows-environment.md.
+# macOS: gemini-player (Cocoa + WebKit). See requirement-cpp-macos-environment.md.
 # Ubuntu: gemini-wilgat (GTK 3 + WebKitGTK). See requirement-cpp-dual-build.md.
 
 cmake_minimum_required(VERSION 3.20)
-project(gemini-player VERSION 1.1.0 LANGUAGES C CXX)
+project(gemini-player VERSION 1.2.0 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -57,6 +58,37 @@ add_custom_command(TARGET gemini-player POST_BUILD
         "$<TARGET_FILE_DIR:gemini-player>/WebView2Loader.dll"
     VERBATIM
 )
+elseif(APPLE)
+    set(CMAKE_OBJCXX_STANDARD 17)
+    set(CMAKE_OBJCXX_STANDARD_REQUIRED ON)
+    enable_language(OBJCXX)
+    add_executable(gemini-player
+        src/mac/mac_log.cpp
+        src/mac/mac_host.cpp
+        src/mac/mac_app.mm
+        third_party/sqlite/sqlite3.c
+    )
+    target_include_directories(gemini-player PRIVATE
+        src/mac
+        src/main/cpp
+        third_party/sqlite
+    )
+    target_compile_definitions(gemini-player PRIVATE
+        SQLITE_THREADSAFE=1
+        SQLITE_OMIT_LOAD_EXTENSION
+    )
+    target_compile_options(gemini-player PRIVATE
+        $<$<COMPILE_LANGUAGE:CXX>:-Wall>
+        $<$<COMPILE_LANGUAGE:CXX>:-Wextra>
+        $<$<COMPILE_LANGUAGE:OBJCXX>:-fobjc-arc>
+        $<$<COMPILE_LANGUAGE:OBJCXX>:-Wall>
+        $<$<COMPILE_LANGUAGE:OBJCXX>:-Wextra>
+    )
+    set_source_files_properties(third_party/sqlite/sqlite3.c PROPERTIES COMPILE_OPTIONS "-w")
+    target_link_libraries(gemini-player PRIVATE
+        "-framework Cocoa"
+        "-framework WebKit"
+    )
 else()
     find_package(PkgConfig REQUIRED)
     pkg_check_modules(PLAYER REQUIRED
