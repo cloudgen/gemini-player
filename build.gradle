@@ -24,7 +24,7 @@ plugins {
     id 'cpp-application'
 }
 
-def THIS_VERSION = '1.2.0'
+def THIS_VERSION = '1.2.1'
 
 // Host dispatch. The cpp-application tasks below stay the Ubuntu GTK compile.
 // On Windows those tasks are skipped and assemble runs build-win.bat.

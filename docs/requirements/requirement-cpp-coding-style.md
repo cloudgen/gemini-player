@@ -141,7 +141,7 @@ A direct `g_warning` outside the logger is still **gnome-debug** and must be sto
 
 ## UI view for an app log
 
-The UI view for an app log is the HTML table the main web view shows for one log file. The portable rule is `docs/terminologies/ui-view-for-app-log.md`. This section copies it. The behavior is `requirement-cpp-log-commands.md` §2.8. `log show` is not this view. It prints the file bytes unchanged.
+The UI view for an app log is the HTML table the main web view shows for one log file. The behavior is `requirement-cpp-log-commands.md` §2.8. `log show` is not this view. It prints the file bytes unchanged.
 
 | Piece | Rule |
 |-------|------|

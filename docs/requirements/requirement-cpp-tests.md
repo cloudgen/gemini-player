@@ -58,6 +58,7 @@ Forbidden without an explicit request: isolated unit tests of `auto_follow.cpp`,
 | TP-WEBUI-AUTO-FOLLOW | requirement-cpp-webui-auto-follow | The allow-list is only `NULL`, so a URI change does not inject. The script clicks `button[aria-label="Follow"]` once and retries the search at 500 ms for at most 20 attempts |
 | TP-CPP-LOGGER | requirement-cpp-logger | `test --home /tmp --log-datestamp 20261003` writes one stored line into `/tmp/.app/gemini-wilgat/log/gemini-wilgat-20261003.log`. `test --prefix /tmp` with the same stamp writes a different file under `/tmp/var/gemini-wilgat/log/`. The component on a stored line is the base name of the source file that called `ciao_*` |
 | TP-CPP-LOGGER-FOLDER | requirement-cpp-logger-folder | A normal user resolves `$HOME/.app/gemini-wilgat/log`. Root or sudo resolves `/var/gemini-wilgat/log`. `--prefix /tmp` and `--home /tmp` do not share a directory |
+| TP-ARS-TABLE | requirement-actor-role-subject | The actor table columns are Actor, Role, and Subject only. Help and install are rows. Subject on those rows is None. Approver and Submitter are not column names |
 
 ## 3. Protection rule
 

@@ -42,7 +42,7 @@ This workspace is a software product people install and run: a native GTK window
 4. The toolchain class is system `g++`. Version policy is unconstrained: a recent toolchain that passes the build. C++ is C++17. Cross-compilation is out of scope.
 5. The primary build tool is `./build.sh` (`install`, `clean`, `build`). Meson is a second build file and must compile the same sources. The dependency set is owned by `requirement-cpp-dependencies.md`. There is no lockfile.
 6. The end-user runtime is a Linux session with GTK 3 and WebKitGTK 4.1. The developer machine needs the same libraries plus a C++ compiler and Lua 5.3 headers. Package names are owned by `requirement-cpp-dependencies.md`.
-7. Actor / role / subject: **considered — no dest approver and no approval subject**. There is no approval desk.
+7. Actor / role / subject: no dest approver and no approval subject. The light table is `requirement-actor-role-subject.md` (Actor, Role, Subject). There is no approval desk. The class sentence points at that file. It does not replace the table.
 8. Dest fence conditions: **considered — no dest fence conditions**. Do not invent one.
 9. Coding-style related requirement: `requirement-cpp-coding-style.md`. This class file points at it and does not restate the C++ rules.
 10. The ship unit does not call `sudo`. `./build.sh install` may run `sudo apt` to install host packages. That is developer bootstrap, not an in-application sudo grant. There is no sudo-command requirement.
@@ -52,8 +52,8 @@ This workspace is a software product people install and run: a native GTK window
 - Display name: `Gemini (wilgat)` (`PROJECT_NAME` in `src/main/cpp/project.h`).
 - Runtime id: `gemini-wilgat` (`PROJECT_ID`).
 - Start page: `https://gemini.google.com` (`START_PAGE`). Owned in detail by `requirement-cpp-window.md`.
-- Version macros in `project.h` are the runtime version. `project.ini` `VERSION` is the build-script version and may differ until those two files are aligned.
-- This folder is not a git repository. No origin URL is recorded.
+- Version macros in `project.h` are the runtime version. `project.ini` `VERSION` matches those macros.
+- The project repository is `cloudgen/gemini-player`.
 - Host packages and link modules are owned by `requirement-cpp-dependencies.md`.
 
 ## 3. Residual ownership
@@ -61,6 +61,7 @@ This workspace is a software product people install and run: a native GTK window
 | Topic | Owner |
 |-------|--------|
 | Class, languages, compilers, primary build tool | this file |
+| Who runs each verb family | `requirement-actor-role-subject.md` |
 | C/C++ coding rules | `requirement-cpp-coding-style.md` |
 | Window, WebKit order, userscripts, audio environment | `requirement-cpp-window.md` |
 | UI menu bar | `requirement-cpp-ui-menu.md` |
@@ -92,6 +93,19 @@ Future editors must not add a second class file, invent an approver, invent a de
 | `docs/requirements/requirement-cpp-window.md` | Live window |
 | `src/main/cpp/project.h` | Runtime identity |
 | `docs/requirements/requirement-cpp-dependencies.md` | Libraries and apt packages |
+| `docs/requirements/requirement-actor-role-subject.md` | Who runs each verb family |
 
-**Last updated**: 2026-10-04
+## 6. Terminologies
+
+**Actor / role / subject** is the light consider catalog for a software-development program that has no dest approver: who runs a verb, in what role, and for whom, if anyone. The printed table has three columns: Actor, Role, and Subject. It must not grow an Approver column.
+
+**Human daily-life explanation.** Actor / role / subject is the short who-is-who list for a kitchen that has no stamp person: who cooks, in what job, and whose cake it is, if anyone's. You still write the list. You do not add a fake teacher signature.
+
+**Daily-life example.** A home bake has a mixer (actor), the job "mix" (role), and None for whose form it is (subject) because nobody submits that bake for a stamp. You do not invent a vice-principal so the sheet looks official.
+
+## 7. Status history
+
+- **1.2.1** (2026-10-31): Rule 7 points at `requirement-actor-role-subject.md`. The residual sentence is not the table.
+
+**Last updated**: 2026-10-31
 **Owner**: Project class

@@ -176,7 +176,6 @@ Map: `docs/reviews/test-plan.md`. The File → Log click path stays with `TP-UI-
 | `src/main/cpp/menu_log.cpp` | The Log menu |
 | `src/main/cpp/log_view_html.cpp` | The HTML table |
 | `docs/requirements/requirement-cpp-log-format.md` | Checker and Go. A pass uses this table |
-| `docs/terminologies/ui-view-for-app-log.md` | Portable design rule. §2.8 copies it. |
 | `src/main/cpp/ui_menu_app.cpp` | Inserts Log before Exit |
 
 **Last updated**: 2026-10-06

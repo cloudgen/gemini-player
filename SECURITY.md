@@ -105,10 +105,3 @@ This project is heavily inspired by Wilgat’s `pix-wilgat` and is fully compati
 **Last updated:** April 2026
 
 Thank you for helping keep **gemini-wilgat** secure!
-```
-
-### Recommendations:
-- Place this file in the **root** of your repository so GitHub automatically detects it and shows a "Security policy" link.
-- After creating the file, go to your repo → **Security** tab → **Security policy** to enable it officially if needed.
-
-Would you like a shorter version, or any adjustments (e.g., different email, more emphasis on CIAO, or adding PGP key instructions)?

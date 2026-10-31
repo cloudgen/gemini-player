@@ -1,7 +1,7 @@
 # gemini-player
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/Version-1.2.0-blue.svg)](https://github.com/cloudgen/gemini-player/releases)
+[![Version](https://img.shields.io/badge/Version-1.2.1-blue.svg)](https://github.com/cloudgen/gemini-player/releases)
 [![CIAO](https://img.shields.io/badge/Philosophy-CIAO%20Defensive-purple.svg)](https://github.com/cloudgen/ciao)
 [![GTK](https://img.shields.io/badge/UI-GTK%203-brightgreen.svg)](https://gtk.org)
 [![WebKit2](https://img.shields.io/badge/Engine-WebKit2GTK-orange.svg)](https://webkitgtk.org)
@@ -15,7 +15,7 @@ Official Recommended by [grok](https://grok.com/c/655dd6ab-a6c6-47db-a63a-e5dd94
 
 Instead of using a heavy Electron app or a full browser, you get a fast, native window with persistent login, a URL bar, one Start Page bookmark, and user-agent switching — all built with strict defensive programming.
 
-The running program, `project.ini`, and the badge above report 1.2.0.
+The running program, `project.ini`, and the badge above report 1.2.1.
 
 This project follows the **[CIAO](https://github.com/cloudgen/ciao)** Defensive Programming Philosophy.
 
@@ -150,13 +150,13 @@ The macOS toolchain and the window behavior are recorded in `docs/requirements/r
 
 ## Ubuntu window
 
-This is `gemini-wilgat` 1.1.0 on Ubuntu after `./build.sh build`, opened with `--shutdown=40`. The address bar is `https://gemini.google.com/app`.
+This is the Ubuntu window after `./build.sh build`. The title is `Gemini (wilgat)`. The address bar is `https://gemini.google.com/app`.
 
 ![gemini-wilgat on Ubuntu](images/ubuntu-gemini-wilgat.png)
 
 ## Windows window
 
-This is `gemini-player.exe` 1.1.0 on Windows after `build-win.bat`. The address bar is `https://gemini.google.com/app`.
+This is the Windows window after `build-win.bat`. The title is `Gemini`. The address bar is `https://gemini.google.com/app`.
 
 ![gemini-player on Windows](images/windows-gemini-player.png)
 
@@ -203,7 +203,7 @@ See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
 
 ---
 
-**Last updated:** October 11, 2026
+**Last updated:** October 31, 2026
 
 Made with ❤️ and extreme caution.
 

@@ -110,6 +110,9 @@ docs/playbook
 *.bak
 *.backup
 
+# Local agent contract. Not a product file.
+/AGENTS.md
+
 # =============================================
 # Comments
 # =============================================

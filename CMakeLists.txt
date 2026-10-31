@@ -4,7 +4,7 @@
 # Ubuntu: gemini-wilgat (GTK 3 + WebKitGTK). See requirement-cpp-dual-build.md.
 
 cmake_minimum_required(VERSION 3.20)
-project(gemini-player VERSION 1.2.0 LANGUAGES C CXX)
+project(gemini-player VERSION 1.2.1 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)

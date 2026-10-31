@@ -42,7 +42,7 @@ This file owns the macOS program `gemini-player`. The Linux program remains `gem
 | `PROJECT_ID` | `gemini-player` |
 | `PROJECT_NAME` | `Gemini` |
 | `PROJECT_DESCRIPTION` | `A lightweight native Gemini player built with WebKit on macOS.` |
-| `VERSION_MAJOR` `VERSION_MINOR` `VERSION_PATCH` | Unchanged from `project.h` (`1.2.0`) |
+| `VERSION_MAJOR` `VERSION_MINOR` `VERSION_PATCH` | Unchanged from `project.h` (`1.2.1`) |
 | `START_PAGE` | Unchanged from `project.h` (`https://gemini.google.com`) |
 | `PLAYER_DEFAULT_USER_AGENT` | `UA_SAFARI` |
 

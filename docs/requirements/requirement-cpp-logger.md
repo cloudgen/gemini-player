@@ -114,7 +114,7 @@ The file is `gemini-wilgat-<YYYYMMDD>.log` inside the log directory, or inside t
 
 The stored line in §2.1 is not rewritten for display. The non-UI command `log show N` prints the corresponding file's bytes with no added header and no removed character. That command is `requirement-cpp-log-commands.md` §2.2. The rehearsal `show` in §2.3 item 7 does the same for the dated file it names: it prints the file, and it does not build a table.
 
-The UI view for an app log is the HTML table in the main web view. It is not this Deferred row. The current rule is `requirement-cpp-log-commands.md` §2.8, copied from `docs/terminologies/ui-view-for-app-log.md`. The sheet omits `[` `]` `<` `>` `(` `)` `{` `}` from each cell. The file keeps those characters.
+The UI view for an app log is the HTML table in the main web view. It is not this Deferred row. The current rule is `requirement-cpp-log-commands.md` §2.8. The sheet omits `[` `]` `<` `>` `(` `)` `{` `}` from each cell. The file keeps those characters.
 
 ## 3. Protection rule
 
@@ -135,8 +135,6 @@ Future editors must not add a second logging API, change the §2.1 stored line, 
 | `src/main/cpp/output.h` | `ciao_*` |
 | `docs/requirements/requirement-cpp-log-commands.md` | Live `log` verb. Not `test`, `list`, or `show` |
 | `docs/requirements/requirement-cpp-log-format.md` | Active checker for §2.1. Not the writer |
-| `docs/terminologies/project-log-content-type.md` | Portable catalog. This file copies §2.2 from it. |
-| `docs/terminologies/ui-view-for-app-log.md` | Portable display rule. §2.4 points at it. The Active copy is log-commands §2.8. |
 
 **Last updated**: 2026-10-06
 **Owner**: Logger

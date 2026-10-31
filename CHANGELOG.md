@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2026-10-31
+
+### Added
+- Who runs each verb family is `docs/requirements/requirement-actor-role-subject.md`. The columns are Actor, Role, and Subject. Help and install use Subject None. There is no Approver column.
+
+### Changed
+- `project.h`, `project.ini`, Meson, CMake, the Ant `version` property, and the Gradle script version are 1.2.1.
+- The README window captions name the title and the address bar on the picture. They do not stamp a version the picture does not show.
+- `SECURITY.md` no longer ends with an agent question or a stray fence.
+- The root ignore list keeps the local agent contract out of the published tree.
+
 ## [1.2.0] - 2026-10-11
 
 ### Added

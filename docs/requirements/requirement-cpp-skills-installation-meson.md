@@ -69,7 +69,7 @@ Current sources:
 - `src/main/cpp/webkit_setup.cpp`
 - `src/main/cpp/userscript_manager.cpp`
 
-The `project()` version is 1.0.7, the same numbers as the `project.h` macros. `project.ini` `VERSION` and the README badge stay 1.0.6 until those two are aligned. Do not invent another version number.
+The `project()` version is 1.2.1, the same numbers as the `project.h` macros. `project.ini` `VERSION` and the README badge are 1.2.1. Do not invent another version number.
 
 ## 3. Protection rule
 
